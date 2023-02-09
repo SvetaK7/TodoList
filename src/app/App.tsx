@@ -17,14 +17,17 @@ import {useAppDispatch, useAppSelector} from "./store";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
-import {meTC} from "../features/Login/auth-reducer";
+import {logOutTC, meTC} from "../features/Login/auth-reducer";
 import CircularProgress from "@mui/material/CircularProgress";
 import {RequestStatusType} from "./app-reducer";
 
 
 function App() {
     const isInitialized = useAppSelector<boolean>(state => state.app.isInitialized)
+    const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
     const diapstch = useAppDispatch();
+    const logOutHandler = () => diapstch(logOutTC());
+
     useEffect(() => {
         diapstch(meTC())
     }, [])
@@ -49,7 +52,7 @@ function App() {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {isLoggedIn && <Button color="inherit" onClick={logOutHandler}>Log out</Button>}
                 </Toolbar>
                 {status === 'loading' && <LinearProgress color="secondary" />}
             </AppBar>

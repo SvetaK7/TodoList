@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -9,8 +9,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {log} from "util";
-import {useAppDispatch} from "../../app/store";
+import {useAppDispatch, useAppSelector} from "../../app/store";
 import {loginTC} from "./auth-reducer";
+import {Navigate} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
@@ -18,6 +19,7 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch();
     const formik = useFormik({
         initialValues: {
@@ -46,6 +48,10 @@ export const Login = () => {
         },
     })
     console.log(formik.values);
+
+    if (isLoggedIn){
+       return <Navigate to={ '/'}/>
+    }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>

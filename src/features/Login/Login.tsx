@@ -8,7 +8,6 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
-import {log} from "util";
 import {useAppDispatch, useAppSelector} from "../../app/store";
 import {loginTC} from "./auth-reducer";
 import {Navigate} from "react-router-dom";
@@ -70,10 +69,6 @@ export const Login = () => {
                     <FormGroup>
                         <TextField label="Email"
                                    margin="normal"
-                            // name={'email'}
-                            // onChange={formik.handleChange}
-                            // value={formik.values.email}
-                            // onBlur={formik.handleBlur}
                                    {...formik.getFieldProps('email')}
                         />
                         {formik.touched.email && formik.errors.email ?

@@ -77,5 +77,7 @@ export const meTC = () => async (dispatch: Dispatch<ActionsType>) => {
     }
 }
 
+
+
 // types
 type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusActionType | SetAppErrorActionType | SetIsInitializedActionType
